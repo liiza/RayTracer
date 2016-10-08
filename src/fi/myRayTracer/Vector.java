@@ -28,16 +28,16 @@ public class Vector {
         return new Vector(i, j, k);
     }
 
-    public Vector unitVector() {
-        double length = getLength();
-        return new Vector(i/length, j/length, k/length);
-    }
-
     public Vector multiply(double t) {
         double i = this.i * t;
         double j = this.j * t;
         double k = this.k * t;
         return new Vector(i, j, k);
+    }
+
+    public Vector unitVector() {
+        double length = getLength();
+        return new Vector(i/length, j/length, k/length);
     }
 
     double getLength() {

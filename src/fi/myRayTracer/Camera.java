@@ -2,23 +2,34 @@ package fi.myRayTracer;
 
 public class Camera {
 
-    private Vector position;
+    private Vector position = new Vector(0, 0, 0);
 
-    private Vector up;
+    private Vector up = new Vector(0, 1, 0);
 
-    private Vector direction;
+    private Vector direction = new Vector(0, 0, 1);
 
     private RayTracer rayTracer;
+
+    public Camera(RayTracer rayTracer) {
+        this.rayTracer = rayTracer;
+    }
 
     public Pixel[][] takePicture(double distance, int height, int width) {
         Pixel[][] pixels = new Pixel[width][height];
         for (int x = 0; x < width; x++){
             for(int y = 0; y < height; y++) {
-                Vector vector = (new Vector(x, y, distance)).minus(position);
+                Vector vector = getRayVector(distance, x, y);
                 Ray ray = new Ray(position, vector.unitVector());
                 pixels[x][y] = rayTracer.traceRay(ray);
             }
         }
         return pixels;
+    }
+
+    private Vector getRayVector(double distance, int x, int y) {
+        Vector direction = this.direction.multiply(distance);
+        Vector xyOffSet = new Vector(x, y, 0);
+        Vector relational = direction.plus(xyOffSet);
+        return relational.minus(position);
     }
 }
