@@ -53,7 +53,7 @@ public class Vector {
     }
 
     // This is purely to make test data generation nicer.
-    public static Vector vertix(int i, int j, int k) {
+    public static Vector vertex(int i, int j, int k) {
         return new Vector(i, j, k);
     }
 }

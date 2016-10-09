@@ -18,7 +18,7 @@ public class Camera {
         Pixel[][] pixels = new Pixel[width][height];
         for (int x = 0; x < width; x++){
             for(int y = 0; y < height; y++) {
-                Ray ray = new Ray(position, getRayVector(distance, x, y).unitVector());
+                Ray ray = new Ray(position, getRayVector(distance, x, y));
                 pixels[x][y] = rayTracer.traceRay(ray);
             }
         }
@@ -29,6 +29,6 @@ public class Camera {
         Vector direction = this.direction.multiply(distance);
         Vector xyOffSet = new Vector(x, y, 0);
         Vector relational = direction.plus(xyOffSet);
-        return relational.minus(position);
+        return relational.plus(position);
     }
 }
