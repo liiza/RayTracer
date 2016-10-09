@@ -9,7 +9,7 @@ public class ColoredImageRendererTest {
     }
 
     private static void should_return_int_value_for_rgb() {
-        int rgbInt = ColoredImageRenderer.toRGBInt(255, 255, 255);
+        int rgbInt = Pixel.toRGBInt(255, 255, 255);
 
         assertDouble(16777215, rgbInt);
     }

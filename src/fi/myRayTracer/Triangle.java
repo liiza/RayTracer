@@ -7,12 +7,13 @@ public class Triangle {
     public Vector v1;
     public Vector v2;
     public Vector v3;
-    private Pixel color;
+    public Pixel color;
 
-    public Triangle(Vector v1, Vector e2, Vector e3) {
+    public Triangle(Vector v1, Vector e2, Vector e3, Pixel color) {
         this.v1 = v1;
         this.v2 = e2;
         this.v3 = e3;
+        this.color = color;
     }
 
     public Hit intersects(Ray ray) {

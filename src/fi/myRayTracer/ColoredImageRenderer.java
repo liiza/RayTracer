@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fi.myRayTracer.Pixel.toRGBInt;
+import static fi.myRayTracer.Vector.vertex;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class ColoredImageRenderer {
     public static final int HEIGHT = 20;
     public static final int WIDTH = 20;
+    public static final Pixel RED = new Pixel(255, 0, 0);
+    public static final Pixel GREEN = new Pixel(0, 255, 0);
 
     public static void main(String[] args) {
         RayTracer tracer = new RayTracer(getTriangles());
@@ -24,37 +28,18 @@ public class ColoredImageRenderer {
             }
         }
         try {
-            File file = new File("Output.jpg");
+            File file = new File("Output.png");
             ImageIO.write(image, "png", file);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
     private static List<Triangle> getTriangles() {
         List<Triangle> triangleList = new ArrayList<>();
-
-        Vector v1 = new Vector(3, 2, 5);
-        Vector v2 = new Vector(7, 2, 5);
-        Vector v3 = new Vector(3, 0, 5);
-        Triangle triangle = new Triangle(v1, v2, v3);
-        triangle.setColor(new Pixel(0,0,200));
-
-        Vector v11 = new Vector(1, 6, 5);
-        Vector v12 = new Vector(5, 2, 5);
-        Vector v13 = new Vector(1, 2, 5);
-        Triangle triangle2 = new Triangle(v11, v12, v13);
-        triangle2.setColor(new Pixel(200,0,0));
-
-        triangleList.add(triangle);
-        triangleList.add(triangle2);
+        triangleList.add(new Triangle(vertex(3, 2, 5), vertex(7, 2, 5), vertex(3, 0, 5), RED));
+        triangleList.add(new Triangle(vertex(1, 6, 5), vertex(5, 2, 5), vertex(1, 2, 5), GREEN));
+        triangleList.add(new Triangle(vertex(-1, -6, 5), vertex(5, -2, 5), vertex(-1, -2, 5), GREEN));
         return triangleList;
-    }
-
-    static int toRGBInt(int r, int g, int b) {
-        int rgb = r;
-        rgb = (rgb << 8) + g;
-        rgb = (rgb << 8) + b;
-        return rgb;
     }
 }

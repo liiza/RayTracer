@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class RayTracer {
 
-    private static final Pixel BACKGROUND_COLOR = new Pixel(0, 0, 0);
+    private static final Pixel WHITE = new Pixel(255, 255, 255);
 
     private List<Triangle> triangles = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class RayTracer {
         if (min.isPresent()) {
             return min.get().getKey().getColor();
         } else {
-            return BACKGROUND_COLOR;
+            return WHITE;
         }
     }
 }

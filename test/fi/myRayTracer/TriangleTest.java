@@ -7,6 +7,8 @@ import static fi.myRayTracer.Vector.vertex;
 
 public class TriangleTest {
 
+    public static final Pixel COLOR = new Pixel(0, 0, 0);
+
     public static void main(String[] args) {
         System.out.println("Triangle tests");
         should_return_correct_normal_vector();
@@ -22,7 +24,7 @@ public class TriangleTest {
 
     private static void should_return_correct_normal_vector() {
         System.out.println("Should return correct normal vector");
-        Triangle t = new Triangle(vertex(1, -2, 0), vertex(3, 1, 4), vertex(0, -1, 2));
+        Triangle t = new Triangle(vertex(1, -2, 0), vertex(3, 1, 4), vertex(0, -1, 2), COLOR);
 
         Vector planeNormal = t.getPlaneNormal();
 
@@ -33,7 +35,7 @@ public class TriangleTest {
 
     private static void should_return_correct_distance_to_plane() {
         System.out.println("Should return correct distance to plane");
-        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector r = new Vector(0, 0, 1);
         Vector P0 = new Vector(0, 1, -1);
 
@@ -44,7 +46,7 @@ public class TriangleTest {
 
     private static void should_return_correct_point_on_the_plane(){
         System.out.println("Should return correct point on the plane");
-        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector r = new Vector(0, 0, 1);
         Vector P0 = new Vector(0, 1, -1);
 
@@ -57,7 +59,7 @@ public class TriangleTest {
 
     private static void should_return_true_if_point_inside_triangle() {
         System.out.println("Should return true if point inside triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector P = new Vector(0, 1, 1);
         Vector P0 = new Vector(0, 1, -1);
 
@@ -66,7 +68,7 @@ public class TriangleTest {
 
     private static void should_return_false_if_point_is_not_inside_triangle() {
         System.out.println("Should return false if point is not inside triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector P = new Vector(0, 10, 1);
         Vector P0 = new Vector(0, 1, -1);
 
@@ -95,7 +97,7 @@ public class TriangleTest {
 
     private static void should_return_true_for_ray_that_intersects_triangle() {
         System.out.println("Should return true for ray that intersects triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector r =  new Vector(0, 0, 1);
         Vector P0 = new Vector(0, 1, 0);
         Ray ray = new Ray(P0, r);
@@ -107,7 +109,7 @@ public class TriangleTest {
 
     private static void should_return_false_for_ray_that_does_not_intersect_triangle() {
         System.out.println("Should return false for ray that does not intersect triangle");
-        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1));
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector r =  new Vector(0, 0, 1);
         Vector P0 = new Vector(0, -1, 100);
         Ray ray = new Ray(P0, r);

@@ -4,6 +4,8 @@ import static java.lang.String.join;
 import static java.lang.String.valueOf;
 
 public class Pixel {
+    public static final int WHITE = 16777215;
+
     public int r;
     public int g;
     public int b;
@@ -12,6 +14,17 @@ public class Pixel {
         this.r = r;
         this.g = g;
         this.b = b;
+    }
+
+    public boolean isWhite() {
+        return toRGBInt(r, g, b) == WHITE;
+    }
+
+    static int toRGBInt(int r, int g, int b) {
+        int rgb = r;
+        rgb = (rgb << 8) + g;
+        rgb = (rgb << 8) + b;
+        return rgb;
     }
 
     @Override
