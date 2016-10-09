@@ -18,8 +18,7 @@ public class Camera {
         Pixel[][] pixels = new Pixel[width][height];
         for (int x = 0; x < width; x++){
             for(int y = 0; y < height; y++) {
-                Vector vector = getRayVector(distance, x, y);
-                Ray ray = new Ray(position, vector.unitVector());
+                Ray ray = new Ray(position, getRayVector(distance, x, y).unitVector());
                 pixels[x][y] = rayTracer.traceRay(ray);
             }
         }

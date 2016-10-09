@@ -51,4 +51,9 @@ public class Vector {
     public static double dotProduct(Vector u, Vector v) {
         return u.i * v.i + u.j * v.j + u.k * v.k;
     }
+
+    // This is purely to make test data generation nicer.
+    public static Vector vertix(int i, int j, int k) {
+        return new Vector(i, j, k);
+    }
 }
