@@ -16,10 +16,10 @@ public class Camera {
 
     public Pixel[][] takePicture(double distance, int height, int width) {
         Pixel[][] pixels = new Pixel[width][height];
-        for (int x = 0; x < height; x++){
-            for(int y = 0; y < width; y++) {
-                Ray ray = new Ray(position, getRayVector(distance, y, x));
-                pixels[x][y] = rayTracer.traceRay(ray);
+        for (int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++) {
+                Ray ray = new Ray(position, getRayVector(distance, x, y));
+                pixels[y][x] = rayTracer.traceRay(ray);
             }
         }
         return pixels;

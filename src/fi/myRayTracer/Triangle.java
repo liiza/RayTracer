@@ -7,6 +7,7 @@ public class Triangle {
     public Vector v1;
     public Vector v2;
     public Vector v3;
+    private Pixel color;
 
     public Triangle(Vector v1, Vector e2, Vector e3) {
         this.v1 = v1;
@@ -52,6 +53,10 @@ public class Triangle {
     }
 
     public Pixel getColor() {
-        return new Pixel(1, 1, 1);
+        return color;
+    }
+
+    public void setColor(Pixel color) {
+        this.color = color;
     }
 }
