@@ -7,7 +7,7 @@ public class Renderer {
 
     public static void main(String[] args) {
         Vector v1 = new Vector(0, 5, 5);
-        Vector v2 = new Vector(2, 5, 5);
+        Vector v2 = new Vector(5, 5, 5);
         Vector v3 = new Vector(0, 0, 5);
         Triangle triangle = new Triangle(v1, v2, v3);
         List<Triangle> triangleList = new ArrayList<>();
