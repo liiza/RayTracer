@@ -16,6 +16,7 @@ public class ColoredImageRenderer {
     public static final int WIDTH = 20;
     public static final Pixel RED = new Pixel(255, 0, 0);
     public static final Pixel GREEN = new Pixel(0, 255, 0);
+    public static final Pixel BLUE = new Pixel(0, 0, 255);
 
     public static void main(String[] args) {
         RayTracer tracer = new RayTracer(getTriangles());
@@ -39,7 +40,7 @@ public class ColoredImageRenderer {
         List<Triangle> triangleList = new ArrayList<>();
         triangleList.add(new Triangle(vertex(3, 2, 5), vertex(7, 2, 5), vertex(3, 0, 5), RED));
         triangleList.add(new Triangle(vertex(1, 6, 5), vertex(5, 2, 5), vertex(1, 2, 5), GREEN));
-        triangleList.add(new Triangle(vertex(-1, -6, 5), vertex(5, -2, 5), vertex(-1, -2, 5), GREEN));
+        triangleList.add(new Triangle(vertex(1, -6, 5), vertex(1, -2, 5), vertex(5, -2, 5), BLUE));
         return triangleList;
     }
 }
