@@ -74,9 +74,16 @@ public class TestUtils {
         assertDouble(vector.k, k);
     }
 
-    public static void assertTriangle(Triangle triangle, Triangle triangle2) {
-        List<Vector> vertices = triangle.vertices();
-        List<Vector> vertices2 = triangle2.vertices();
+    public static void assertTriangle(Triangle actual, Triangle excepted) {
+        assertTriangle(null, actual, excepted);
+    }
+
+    public static void assertTriangle(String msg, Triangle actual, Triangle excepted) {
+        if (msg !=null) {
+            System.out.println(msg);
+        }
+        List<Vector> vertices = actual.vertices();
+        List<Vector> vertices2 = excepted.vertices();
         Collections.sort(vertices, VECTOR_COMPARATOR);
         Collections.sort(vertices2, VECTOR_COMPARATOR);
         assertVector(vertices.get(0), vertices2.get(0));
