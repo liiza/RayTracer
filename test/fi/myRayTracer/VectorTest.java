@@ -39,9 +39,9 @@ public class VectorTest {
 
         Vector minus = vector.minus(new Vector(1, 1, 1));
 
-        assertDouble(2, minus.i);
-        assertDouble(0, minus.j);
-        assertDouble(1, minus.k);
+        assertDouble(2.0, minus.i);
+        assertDouble(0.0, minus.j);
+        assertDouble(1.0, minus.k);
     }
 
     public static void should_minus_plus_vector_to_other_vector() {
@@ -50,9 +50,9 @@ public class VectorTest {
 
         Vector plus = vector.plus(new Vector(1, 1, 1));
 
-        assertDouble(0, plus.i);
-        assertDouble(2, plus.j);
-        assertDouble(3, plus.k);
+        assertDouble(0.0, plus.i);
+        assertDouble(2.0, plus.j);
+        assertDouble(3.0, plus.k);
     }
 
     public static void should_multiple_vector_by_scalar() {
@@ -61,9 +61,9 @@ public class VectorTest {
 
         Vector plus = vector.multiply(2);
 
-        assertDouble(-2, plus.i);
-        assertDouble(2, plus.j);
-        assertDouble(4, plus.k);
+        assertDouble(-2.0, plus.i);
+        assertDouble(2.0, plus.j);
+        assertDouble(4.0, plus.k);
     }
 
     public static void should_return_cross_product_of_two_vectors() {
@@ -73,9 +73,9 @@ public class VectorTest {
 
         Vector crossProduct = Vector.crossProduct(vector, vector2);
 
-        assertDouble(32, crossProduct.i);
-        assertDouble(52, crossProduct.j);
-        assertDouble(28, crossProduct.k);
+        assertDouble(32.0, crossProduct.i);
+        assertDouble(52.0, crossProduct.j);
+        assertDouble(28.0, crossProduct.k);
     }
 
     public static void should_return_dot_product_of_two_vectors(){
@@ -85,7 +85,7 @@ public class VectorTest {
 
         double dotProduct = Vector.dotProduct(vector, vector2);
 
-        assertDouble(-18, dotProduct);
+        assertDouble(-18.0, dotProduct);
     }
 
 }

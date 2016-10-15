@@ -1,5 +1,8 @@
 package fi.myRayTracer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static java.lang.String.join;
@@ -62,5 +65,13 @@ public class Vector {
     @Override
     public String toString() {
         return join(" ", valueOf(i), valueOf(j), valueOf(k));
+    }
+
+    public List<Double> components() {
+        List<Double> components = new ArrayList<>();
+        components.add(i);
+        components.add(j);
+        components.add(k);
+        return components;
     }
 }

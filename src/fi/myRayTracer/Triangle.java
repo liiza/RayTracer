@@ -1,5 +1,8 @@
 package fi.myRayTracer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static fi.myRayTracer.Vector.crossProduct;
 import static fi.myRayTracer.Vector.dotProduct;
 
@@ -59,5 +62,13 @@ public class Triangle {
 
     public void setColor(Pixel color) {
         this.color = color;
+    }
+
+    public List<Vector> vertices() {
+        List<Vector> vertices = new ArrayList<>();
+        vertices.add(v1);
+        vertices.add(v2);
+        vertices.add(v3);
+        return vertices;
     }
 }

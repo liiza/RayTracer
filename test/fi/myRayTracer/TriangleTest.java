@@ -41,7 +41,7 @@ public class TriangleTest {
 
         double distanceToPlane = t.distanceToPlane(new Ray(P0, r));
 
-        assertDouble(2, distanceToPlane);
+        assertDouble(2.0, distanceToPlane);
     }
 
     private static void should_return_correct_point_on_the_plane(){
@@ -52,9 +52,9 @@ public class TriangleTest {
 
         Vector point = t.pointOnThePlane(new Ray(P0, r), 2.0);
 
-        assertDouble(0, point.i);
-        assertDouble(1, point.j);
-        assertDouble(1, point.k);
+        assertDouble(0.0, point.i);
+        assertDouble(1.0, point.j);
+        assertDouble(10.0, point.k);
     }
 
     private static void should_return_true_if_point_inside_triangle() {

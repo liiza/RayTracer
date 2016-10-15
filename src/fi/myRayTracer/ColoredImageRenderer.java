@@ -43,16 +43,46 @@ public class ColoredImageRenderer {
     private static List<Triangle> getTriangles() {
         List<Triangle> triangleList = new ArrayList<>();
 
-        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -25), vertex(10, 10, -5), RED));
-        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(-10, 10, -25), vertex(10, 10, -25), BLUE));
+        triangleList.addAll(getCube(vertex(-10, 10, -5), 20, 20, -20));
 
-        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -5), vertex(-10, 30, -5), BLUE));
-        triangleList.add(new Triangle(vertex(10, 30, -5), vertex(-10, 30, -5), vertex(10, 10, -5), RED));
-
-        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -25), vertex(-10, 30, -5), BLUE));
-        triangleList.add(new Triangle(vertex(10, 10, -25), vertex(-10, 30, -5), vertex(-10, 30, -25), RED));
-
-        //        triangleList.add(new Triangle(vertex(1, 6, -5), vertex(1, 2, -5), vertex(5, 2, -5), GREEN));
+//        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -25), vertex(10, 10, -5), RED));
+//        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(-10, 10, -25), vertex(10, 10, -25), BLUE));
+//
+//        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -5), vertex(-10, 30, -5), BLUE));
+//        triangleList.add(new Triangle(vertex(10, 30, -5), vertex(-10, 30, -5), vertex(10, 10, -5), RED));
+//
+//        triangleList.add(new Triangle(vertex(-10, 10, -25), vertex(-10, 30, -25), vertex(10, 10, -25), BLUE));
+//        triangleList.add(new Triangle(vertex(10, 30, -25), vertex(10, 10, -25), vertex(-10, 30, -25), RED));
+//
+//        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -25), vertex(-10, 30, -5), BLUE));
+//        triangleList.add(new Triangle(vertex(10, 10, -25), vertex(-10, 30, -5), vertex(-10, 30, -25), RED));
+//
+//        //        triangleList.add(new Triangle(vertex(1, 6, -5), vertex(1, 2, -5), vertex(5, 2, -5), GREEN));
         return triangleList;
+    }
+
+    static List<Triangle> getCube(Vector vertex, int i, int j, int k) {
+        List<Triangle> triangles = new ArrayList<>();
+        Vector x = new Vector(i, 0, 0);
+        Vector y = new Vector(0, j, 0);
+        Vector z = new Vector(0, 0, k);
+        triangles.addAll(getRectangle(vertex, y, x));
+        triangles.addAll(getRectangle(vertex, z, y));
+        triangles.addAll(getRectangle(vertex, x, z));
+        Vector vertex2 = vertex.plus(new Vector(i, j, k));
+        Vector x1 = x.multiply(-1);
+        Vector y1 = y.multiply(-1);
+        Vector z1 = z.multiply(-1);
+        triangles.addAll(getRectangle(vertex2, y1, x1));
+        triangles.addAll(getRectangle(vertex2, z1, y1));
+        triangles.addAll(getRectangle(vertex2, x1, z1));
+        return triangles;
+    }
+
+    static List<Triangle> getRectangle(Vector v0, Vector y, Vector x) {
+        List<Triangle> triangles = new ArrayList<>();
+        triangles.add(new Triangle(v0, v0.plus(x).plus(y), v0.plus(y), RED));
+        triangles.add(new Triangle(v0, v0.plus(x), v0.plus(x).plus(y), BLUE));
+        return triangles;
     }
 }
