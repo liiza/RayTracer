@@ -13,6 +13,7 @@ public class VectorTest {
         should_multiple_vector_by_scalar();
         should_return_cross_product_of_two_vectors();
         should_return_dot_product_of_two_vectors();
+        should_get_distance_between_two_vectors();
     }
 
     private static void should_return_correct_length() {
@@ -88,4 +89,13 @@ public class VectorTest {
         assertDouble(-18.0, dotProduct);
     }
 
+    private static void should_get_distance_between_two_vectors(){
+        System.out.println("Should get distance between two vectors");
+        Vector vector = new Vector(0, 0, 10);
+        Vector vector1 = new Vector(0, 0, 1);
+
+        double distance = Vector.distance(vector, vector1);
+
+        assertDouble(9.0, distance);
+    }
 }

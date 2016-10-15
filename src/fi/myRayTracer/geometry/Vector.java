@@ -19,6 +19,10 @@ public class Vector {
         this.k = k;
     }
 
+    public static double distance(Vector vector1, Vector vector2) {
+        return vector2.minus(vector1).getLength();
+    }
+
     public Vector minus(Vector position) {
         double i1 = this.i - position.i;
         double j1 = this.j - position.j;
@@ -45,7 +49,7 @@ public class Vector {
         return new Vector(i/length, j/length, k/length);
     }
 
-    double getLength() {
+    public double getLength() {
         return sqrt(pow(i, 2) + pow(j, 2) + pow(k, 2));
     }
 

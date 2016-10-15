@@ -27,7 +27,7 @@ public class RayTracer {
         Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
         if (hit.isPresent()) {
             double light = getLighting(hit.get().getValue().pointOnThePlane);
-            return hit.get().getKey().getColor();
+            return hit.get().getKey().color;
         } else {
             return WHITE;
         }
@@ -43,9 +43,20 @@ public class RayTracer {
     }
 
     double getLighting(Vector pointOnThePlane) {
+        double intensity = 0;
         for (PointLight light : lights) {
-
+            intensity += intensityFromLight(pointOnThePlane, light);
         }
-        return 0;
+        return intensity;
+    }
+
+    private double intensityFromLight(Vector pointOnThePlane, PointLight light) {
+        Ray ray = new Ray(pointOnThePlane, light.position.minus(pointOnThePlane).unitVector());
+        Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
+        if (hit.isPresent()) {
+            return 0;
+        } else {
+            return light.getIntensity(Vector.distance(pointOnThePlane, light.position));
+        }
     }
 }

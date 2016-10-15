@@ -12,6 +12,6 @@ public class PointLight {
     }
 
     public double getIntensity(double distance) {
-        return 1/Math.pow(distance, 2) * intensity;
+        return (1/Math.pow(distance, 2)) * intensity;
     }
 }

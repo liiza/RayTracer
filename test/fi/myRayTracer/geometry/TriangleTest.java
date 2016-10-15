@@ -18,7 +18,7 @@ public class TriangleTest {
         should_return_true_for_ray_that_intersects_triangle();
         should_return_false_for_ray_that_does_not_intersect_triangle();
         should_return_false_for_ray_that_doesnt_point_to_triangle();
-        should_return_false_for_ray_that_is_paraller_to_triangle();
+        should_return_false_for_ray_that_is_parallel_to_triangle();
         should_return_true_if_point_inside_triangle();
         should_return_false_if_point_is_not_inside_triangle();
         should_return_correct_point_on_the_plane();
@@ -64,8 +64,8 @@ public class TriangleTest {
         assertFalse(hit.hit);
     }
 
-    private static void should_return_false_for_ray_that_is_paraller_to_triangle() {
-        System.out.println("Should return false for ray that is paraller to triangle");
+    private static void should_return_false_for_ray_that_is_parallel_to_triangle() {
+        System.out.println("Should return false for ray that is parallel to triangle");
         Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
         Vector r =  new Vector(1, 0, 0);
         Vector P0 = new Vector(0, 0, 0);

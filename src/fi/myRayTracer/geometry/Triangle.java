@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Triangle {
-    public Vector v1;
-    public Vector v2;
-    public Vector v3;
-    public Pixel color;
+    public final Vector v1;
+    public final Vector v2;
+    public final Vector v3;
+    public final Pixel color;
 
     public Triangle(Vector v1, Vector e2, Vector e3, Pixel color) {
         this.v1 = v1;
@@ -57,14 +57,6 @@ public class Triangle {
         Vector v1 = this.v1.minus(v2);
         Vector v2 = this.v1.minus(v3);
         return Vector.crossProduct(v1, v2).unitVector();
-    }
-
-    public Pixel getColor() {
-        return color;
-    }
-
-    public void setColor(Pixel color) {
-        this.color = color;
     }
 
     public List<Vector> vertices() {

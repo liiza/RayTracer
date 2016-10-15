@@ -64,7 +64,7 @@ public class TestUtils {
 
     public static void assertInt(int excepted, int actual) {
         if (excepted != actual) {
-            Object[] args = {actual, excepted};
+            Object[] args = {excepted, actual};
             System.out.println(ERROR_MSG.format(args));
         } else  {
             System.out.println(OK);
@@ -74,7 +74,7 @@ public class TestUtils {
     public static void assertTrue(boolean actual) {
         boolean excepted = true;
         if (actual != excepted) {
-            Object[] args = {actual, excepted};
+            Object[] args = {excepted, actual};
             System.out.println(ERROR_MSG.format(args));
         } else {
             System.out.println(OK);
@@ -84,7 +84,7 @@ public class TestUtils {
     public static void assertFalse(boolean actual) {
         boolean excepted = false;
         if (actual != excepted) {
-            Object[] args = {actual, excepted};
+            Object[] args = {excepted, actual};
             System.out.println(ERROR_MSG.format(args));
         } else {
             System.out.println(OK);
