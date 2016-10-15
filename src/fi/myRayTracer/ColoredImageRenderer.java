@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import static fi.myRayTracer.Pixel.toRGBInt;
 import static fi.myRayTracer.Vector.vertex;
@@ -18,14 +20,15 @@ public class ColoredImageRenderer {
     public static final Pixel GREEN = new Pixel(0, 255, 0);
     public static final Pixel BLUE = new Pixel(0, 0, 255);
     public static final Pixel LIGHT_BLUE = new Pixel(0, 0, 100);
+    public static final int DISTANCE = 15;
 
     public static void main(String[] args) {
         RayTracer tracer = new RayTracer(getTriangles());
-        Vector position = new Vector(-13, 0, 0);
+        Vector position = new Vector(0, 0, 0);
         Vector up = new Vector(0, 1, 0);
         Vector towards = new Vector(0, 0, -1);
         Camera camera = new Camera(tracer, position, up, towards);
-        Pixel[][] pixels = camera.takePicture(10, HEIGHT, WIDTH);
+        Pixel[][] pixels = camera.takePicture(DISTANCE, HEIGHT, WIDTH);
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, TYPE_INT_RGB);
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
@@ -42,8 +45,9 @@ public class ColoredImageRenderer {
 
     private static List<Triangle> getTriangles() {
         List<Triangle> triangleList = new ArrayList<>();
-
-        triangleList.addAll(getCube(vertex(-10, 10, -5), 20, 20, -20));
+        for (int i = 0; i < 5; i++) {
+            triangleList.addAll(randomCube(WIDTH, HEIGHT));
+        }
 
 //        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(10, 10, -25), vertex(10, 10, -5), RED));
 //        triangleList.add(new Triangle(vertex(-10, 10, -5), vertex(-10, 10, -25), vertex(10, 10, -25), BLUE));
@@ -61,6 +65,15 @@ public class ColoredImageRenderer {
         return triangleList;
     }
 
+    private static Collection<? extends Triangle> randomCube(int width, int height) {
+        Random random = new Random();
+        int i = (width/2) - random.nextInt(width);
+        int j = (height/2) - random.nextInt(height);
+        int k = -(DISTANCE +random.nextInt(10));
+        Vector position = new Vector(i, j, k);
+        return getCube(position, random.nextInt(50), random.nextInt(50), -random.nextInt(20));
+    }
+
     static List<Triangle> getCube(Vector vertex, int i, int j, int k) {
         List<Triangle> triangles = new ArrayList<>();
         Vector x = new Vector(i, 0, 0);
@@ -73,9 +86,9 @@ public class ColoredImageRenderer {
         Vector x1 = x.multiply(-1);
         Vector y1 = y.multiply(-1);
         Vector z1 = z.multiply(-1);
-        triangles.addAll(getRectangle(vertex2, y1, x1));
-        triangles.addAll(getRectangle(vertex2, z1, y1));
-        triangles.addAll(getRectangle(vertex2, x1, z1));
+        triangles.addAll(getRectangle(vertex2, x1, y1));
+        triangles.addAll(getRectangle(vertex2, y1, z1));
+        triangles.addAll(getRectangle(vertex2, z1, x1));
         return triangles;
     }
 
