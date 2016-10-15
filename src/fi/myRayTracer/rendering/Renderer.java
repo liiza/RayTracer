@@ -1,4 +1,10 @@
-package fi.myRayTracer;
+package fi.myRayTracer.rendering;
+
+import fi.myRayTracer.geometry.Triangle;
+import fi.myRayTracer.geometry.Vector;
+import fi.myRayTracer.rayTracing.Camera;
+import fi.myRayTracer.rayTracing.Pixel;
+import fi.myRayTracer.rayTracing.RayTracer;
 
 import java.util.ArrayList;
 import java.util.List;

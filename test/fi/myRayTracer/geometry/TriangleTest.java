@@ -1,9 +1,15 @@
-package fi.myRayTracer;
+package fi.myRayTracer.geometry;
+
+import fi.myRayTracer.geometry.Triangle;
+import fi.myRayTracer.geometry.Vector;
+import fi.myRayTracer.rayTracing.Hit;
+import fi.myRayTracer.rayTracing.Pixel;
+import fi.myRayTracer.rayTracing.Ray;
 
 import static fi.myRayTracer.TestUtils.assertDouble;
 import static fi.myRayTracer.TestUtils.assertFalse;
 import static fi.myRayTracer.TestUtils.assertTrue;
-import static fi.myRayTracer.Vector.vertex;
+import static fi.myRayTracer.geometry.Vector.vertex;
 
 public class TriangleTest {
 
@@ -54,7 +60,7 @@ public class TriangleTest {
 
         assertDouble(0.0, point.i);
         assertDouble(1.0, point.j);
-        assertDouble(10.0, point.k);
+        assertDouble(1.0, point.k);
     }
 
     private static void should_return_true_if_point_inside_triangle() {

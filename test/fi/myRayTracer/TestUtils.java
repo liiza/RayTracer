@@ -1,5 +1,8 @@
 package fi.myRayTracer;
 
+import fi.myRayTracer.geometry.Triangle;
+import fi.myRayTracer.geometry.Vector;
+
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +24,7 @@ public class TestUtils {
     private static MessageFormat ERROR_MSG = new MessageFormat("ERROR, excepted {0} but was {1}");
     private static final double ACCEPTED_DIFF = 0.001;
 
-    static void assertDouble(Double excepted, Double actual) {
+    public static void assertDouble(Double excepted, Double actual) {
         double diff = Math.abs(excepted - actual);
         if (diff > ACCEPTED_DIFF) {
             Double[] args = {excepted, actual};
@@ -31,7 +34,7 @@ public class TestUtils {
         }
     }
 
-    static void assertTrue(boolean hit) {
+    public static void assertTrue(boolean hit) {
         boolean excepted = true;
         if (hit != excepted) {
             Object[] args = {excepted, hit};
@@ -42,7 +45,7 @@ public class TestUtils {
 
     }
 
-    static void assertInt(int excepted, int actual) {
+    public static void assertInt(int excepted, int actual) {
         if (excepted != actual) {
             Object[] args = {excepted, actual};
             System.out.println(ERROR_MSG.format(args));

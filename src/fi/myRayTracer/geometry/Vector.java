@@ -1,4 +1,4 @@
-package fi.myRayTracer;
+package fi.myRayTracer.geometry;
 
 import java.util.ArrayList;
 import java.util.List;

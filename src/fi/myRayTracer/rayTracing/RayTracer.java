@@ -1,4 +1,6 @@
-package fi.myRayTracer;
+package fi.myRayTracer.rayTracing;
+
+import fi.myRayTracer.geometry.Triangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,10 @@ public class RayTracer {
 
     public Pixel traceRay(Ray ray) {
         Optional<Map.Entry<Triangle, Hit>> min = triangles.stream()
-                .collect(Collectors.toMap(t -> t, t -> t.intersects(ray)))
-                .entrySet().stream()
-                .filter(entry -> entry.getValue().hit)
-                .min((entry, entry2) -> Double.compare(entry.getValue().distance, entry2.getValue().distance));
+                                                          .collect(Collectors.toMap(t -> t, t -> t.intersects(ray)))
+                                                          .entrySet().stream()
+                                                          .filter(entry -> entry.getValue().hit)
+                                                          .min((entry, entry2) -> Double.compare(entry.getValue().distance, entry2.getValue().distance));
         if (min.isPresent()) {
             return min.get().getKey().getColor();
         } else {

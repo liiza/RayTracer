@@ -1,10 +1,11 @@
-package fi.myRayTracer;
+package fi.myRayTracer.geometry;
+
+import fi.myRayTracer.rayTracing.Hit;
+import fi.myRayTracer.rayTracing.Pixel;
+import fi.myRayTracer.rayTracing.Ray;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static fi.myRayTracer.Vector.crossProduct;
-import static fi.myRayTracer.Vector.dotProduct;
 
 public class Triangle {
     public Vector v1;
@@ -30,8 +31,8 @@ public class Triangle {
 
     double distanceToPlane(Ray ray) {
         Vector N = getPlaneNormal();
-        double d = -dotProduct(N, v1);
-        return -(dotProduct(ray.P0, N) + d) / (dotProduct(ray.V, N));
+        double d = -Vector.dotProduct(N, v1);
+        return -(Vector.dotProduct(ray.P0, N) + d) / (Vector.dotProduct(ray.V, N));
     }
 
     Vector pointOnThePlane(Ray ray, double t) {
@@ -45,15 +46,15 @@ public class Triangle {
     }
 
     static boolean isAboveSurface(Vector v1, Vector v2, Vector point, Vector P0) {
-        Vector N = crossProduct(v2.minus(P0), v1.minus(P0)).unitVector();
-        double d = -dotProduct(P0, N);
-        return (dotProduct(point, N) + d) >= 0;
+        Vector N = Vector.crossProduct(v2.minus(P0), v1.minus(P0)).unitVector();
+        double d = -Vector.dotProduct(P0, N);
+        return (Vector.dotProduct(point, N) + d) >= 0;
     }
 
     Vector getPlaneNormal() {
         Vector v1 = this.v1.minus(v2);
         Vector v2 = this.v1.minus(v3);
-        return crossProduct(v1, v2).unitVector();
+        return Vector.crossProduct(v1, v2).unitVector();
     }
 
     public Pixel getColor() {

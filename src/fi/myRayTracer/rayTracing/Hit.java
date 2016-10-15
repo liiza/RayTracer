@@ -1,8 +1,8 @@
-package fi.myRayTracer;
+package fi.myRayTracer.rayTracing;
 
 public class Hit {
-    boolean hit;
-    double distance;
+    public boolean hit;
+    public double distance;
 
     public Hit(double t, boolean b) {
         distance = t;

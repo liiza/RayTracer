@@ -1,4 +1,6 @@
-package fi.myRayTracer;
+package fi.myRayTracer.rayTracing;
+
+import fi.myRayTracer.geometry.Vector;
 
 public class Ray {
 

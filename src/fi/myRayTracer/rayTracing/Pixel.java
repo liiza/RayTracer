@@ -1,4 +1,4 @@
-package fi.myRayTracer;
+package fi.myRayTracer.rayTracing;
 
 import static java.lang.String.join;
 import static java.lang.String.valueOf;
@@ -20,7 +20,7 @@ public class Pixel {
         return toRGBInt(r, g, b) == WHITE;
     }
 
-    static int toRGBInt(int r, int g, int b) {
+    public static int toRGBInt(int r, int g, int b) {
         int rgb = r;
         rgb = (rgb << 8) + g;
         rgb = (rgb << 8) + b;
