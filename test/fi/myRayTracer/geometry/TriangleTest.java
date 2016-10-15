@@ -1,10 +1,8 @@
 package fi.myRayTracer.geometry;
 
-import fi.myRayTracer.geometry.Triangle;
-import fi.myRayTracer.geometry.Vector;
-import fi.myRayTracer.rayTracing.Hit;
-import fi.myRayTracer.rayTracing.Pixel;
-import fi.myRayTracer.rayTracing.Ray;
+import fi.myRayTracer.rayTracer.Hit;
+import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.Ray;
 
 import static fi.myRayTracer.TestUtils.assertDouble;
 import static fi.myRayTracer.TestUtils.assertFalse;

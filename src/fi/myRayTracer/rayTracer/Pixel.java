@@ -1,4 +1,4 @@
-package fi.myRayTracer.rayTracing;
+package fi.myRayTracer.rayTracer;
 
 import static java.lang.String.join;
 import static java.lang.String.valueOf;

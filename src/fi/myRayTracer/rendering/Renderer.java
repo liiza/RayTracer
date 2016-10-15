@@ -1,10 +1,11 @@
 package fi.myRayTracer.rendering;
 
+import fi.myRayTracer.PointLight;
 import fi.myRayTracer.geometry.Triangle;
 import fi.myRayTracer.geometry.Vector;
-import fi.myRayTracer.rayTracing.Camera;
-import fi.myRayTracer.rayTracing.Pixel;
-import fi.myRayTracer.rayTracing.RayTracer;
+import fi.myRayTracer.rayTracer.Camera;
+import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.RayTracer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,8 @@ public class Renderer {
         Triangle triangle = new Triangle(v1, v2, v3, new Pixel(225, 0, 0));
         List<Triangle> triangleList = new ArrayList<>();
         triangleList.add(triangle);
-        RayTracer tracer = new RayTracer(triangleList);
+        ArrayList<PointLight> lights = new ArrayList<>();
+        RayTracer tracer = new RayTracer(triangleList, lights);
         Camera camera = new Camera(tracer);
         Pixel[][] pixels = camera.takePicture(5, 10, 10);
         for (int i = 0; i < pixels.length; i++) {

@@ -21,58 +21,9 @@ public class TestUtils {
         }
         return 0;
     };
-    private static MessageFormat ERROR_MSG = new MessageFormat("ERROR, excepted {0} but was {1}");
+
+    private static final MessageFormat ERROR_MSG = new MessageFormat("ERROR, excepted {0} but was {1}");
     private static final double ACCEPTED_DIFF = 0.001;
-
-    public static void assertDouble(Double excepted, Double actual) {
-        double diff = Math.abs(excepted - actual);
-        if (diff > ACCEPTED_DIFF) {
-            Double[] args = {excepted, actual};
-            System.out.println(ERROR_MSG.format(args));
-        } else {
-            System.out.println("OK");
-        }
-    }
-
-    public static void assertTrue(boolean hit) {
-        boolean excepted = true;
-        if (hit != excepted) {
-            Object[] args = {excepted, hit};
-            System.out.println(ERROR_MSG.format(args));
-        } else {
-            System.out.println(OK);
-        }
-
-    }
-
-    public static void assertInt(int excepted, int actual) {
-        if (excepted != actual) {
-            Object[] args = {excepted, actual};
-            System.out.println(ERROR_MSG.format(args));
-        } else  {
-            System.out.println(OK);
-        }
-    }
-
-    public static void assertFalse(boolean hit) {
-        boolean excepted = false;
-        if (hit != excepted) {
-            Object[] args = {excepted, hit};
-            System.out.println(ERROR_MSG.format(args));
-        } else {
-            System.out.println(OK);
-        }
-    }
-
-    public static void assertVector(Vector actual, Vector excepted) {
-        assertVector(actual, excepted.i, excepted.j, excepted.k);
-    }
-
-    public static void assertVector(Vector vector, double i, double j, double k) {
-        assertDouble(vector.i, i);
-        assertDouble(vector.j, j);
-        assertDouble(vector.k, k);
-    }
 
     public static void assertTriangle(Triangle actual, Triangle excepted) {
         assertTriangle(null, actual, excepted);
@@ -89,5 +40,54 @@ public class TestUtils {
         assertVector(vertices.get(0), vertices2.get(0));
         assertVector(vertices.get(1), vertices2.get(1));
         assertVector(vertices.get(2), vertices2.get(2));
+    }
+
+    public static void assertVector(Vector actual, Vector excepted) {
+        assertVector(actual, excepted.i, excepted.j, excepted.k);
+    }
+
+    public static void assertVector(Vector vector, double i, double j, double k) {
+        assertDouble(vector.i, i);
+        assertDouble(vector.j, j);
+        assertDouble(vector.k, k);
+    }
+
+    public static void assertDouble(Double excepted, Double actual) {
+        double diff = Math.abs(excepted - actual);
+        if (diff > ACCEPTED_DIFF) {
+            Double[] args = {excepted, actual};
+            System.out.println(ERROR_MSG.format(args));
+        } else {
+            System.out.println("OK");
+        }
+    }
+
+    public static void assertInt(int excepted, int actual) {
+        if (excepted != actual) {
+            Object[] args = {actual, excepted};
+            System.out.println(ERROR_MSG.format(args));
+        } else  {
+            System.out.println(OK);
+        }
+    }
+
+    public static void assertTrue(boolean actual) {
+        boolean excepted = true;
+        if (actual != excepted) {
+            Object[] args = {actual, excepted};
+            System.out.println(ERROR_MSG.format(args));
+        } else {
+            System.out.println(OK);
+        }
+    }
+
+    public static void assertFalse(boolean actual) {
+        boolean excepted = false;
+        if (actual != excepted) {
+            Object[] args = {actual, excepted};
+            System.out.println(ERROR_MSG.format(args));
+        } else {
+            System.out.println(OK);
+        }
     }
 }

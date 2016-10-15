@@ -1,4 +1,4 @@
-package fi.myRayTracer.rayTracing;
+package fi.myRayTracer.rayTracer;
 
 import fi.myRayTracer.geometry.Vector;
 

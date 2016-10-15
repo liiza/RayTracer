@@ -1,8 +1,8 @@
 package fi.myRayTracer.geometry;
 
-import fi.myRayTracer.rayTracing.Hit;
-import fi.myRayTracer.rayTracing.Pixel;
-import fi.myRayTracer.rayTracing.Ray;
+import fi.myRayTracer.rayTracer.Hit;
+import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.Ray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,11 @@ public class Triangle {
     public Hit intersects(Ray ray) {
         double t = distanceToPlane(ray);
         if (t < 0) {
-            return new Hit(t, false);
+            return new Hit(t, false, null);
         } else {
-            return new Hit(t, isInsideTriangle(pointOnThePlane(ray, t), ray.P0));
+            Vector pointOnThePlane = pointOnThePlane(ray, t);
+            boolean insideTriangle = isInsideTriangle(pointOnThePlane, ray.P0);
+            return new Hit(t, insideTriangle, insideTriangle ? pointOnThePlane : null);
         }
     }
 

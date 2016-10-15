@@ -1,16 +1,18 @@
 package fi.myRayTracer.rendering;
 
+import fi.myRayTracer.PointLight;
 import fi.myRayTracer.geometry.Vector;
-import fi.myRayTracer.rayTracing.Camera;
-import fi.myRayTracer.rayTracing.Pixel;
-import fi.myRayTracer.rayTracing.RayTracer;
+import fi.myRayTracer.rayTracer.Camera;
+import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.RayTracer;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import static fi.myRayTracer.rayTracing.Pixel.toRGBInt;
+import static fi.myRayTracer.rayTracer.Pixel.toRGBInt;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class ColoredImageRenderer {
@@ -23,7 +25,8 @@ public class ColoredImageRenderer {
     public static final int DISTANCE = 15;
 
     public static void main(String[] args) {
-        RayTracer tracer = new RayTracer(TestDataGenerator.getTriangles());
+        ArrayList<PointLight> lights = new ArrayList<>();
+        RayTracer tracer = new RayTracer(TestDataGenerator.getTriangles(), lights);
         Vector position = new Vector(0, 0, 0);
         Vector up = new Vector(0, 1, 0);
         Vector towards = new Vector(0, 0, -1);

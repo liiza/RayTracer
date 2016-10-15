@@ -1,6 +1,6 @@
 package fi.myRayTracer.rendering;
 
-import fi.myRayTracer.rayTracing.Pixel;
+import fi.myRayTracer.rayTracer.Pixel;
 import fi.myRayTracer.TestUtils;
 
 public class ColoredImageRendererTest {
