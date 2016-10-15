@@ -61,7 +61,7 @@ public class Vector {
         return u.i * v.i + u.j * v.j + u.k * v.k;
     }
 
-    // This is purely to make test data generation nicer.
+    // This is purely to make data generation nicer.
     public static Vector vertex(int i, int j, int k) {
         return new Vector(i, j, k);
     }

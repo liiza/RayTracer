@@ -1,5 +1,6 @@
 package fi.myRayTracer.rendering;
 
+import fi.myRayTracer.PointLight;
 import fi.myRayTracer.geometry.Triangle;
 import fi.myRayTracer.geometry.Vector;
 
@@ -8,22 +9,34 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import static fi.myRayTracer.geometry.Vector.vertex;
+import static fi.myRayTracer.rendering.ColoredImageRenderer.HEIGHT;
+import static fi.myRayTracer.rendering.ColoredImageRenderer.WIDTH;
+
 public class TestDataGenerator {
     static List<Triangle> getTriangles() {
         List<Triangle> triangleList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            triangleList.addAll(randomCube(ColoredImageRenderer.WIDTH, ColoredImageRenderer.HEIGHT));
+            triangleList.addAll(randomCube(WIDTH, HEIGHT));
         }
         return triangleList;
     }
 
     static Collection<? extends Triangle> randomCube(int width, int height) {
         Random random = new Random();
+        Vector position = randomVectorWithinImageArea(width, height, random);
+        return getCube(position, random.nextInt(50), random.nextInt(50), -random.nextInt(20));
+    }
+
+    static PointLight getRandomPointLight() {
+        return new PointLight(randomVectorWithinImageArea(WIDTH, HEIGHT, new Random()), 1000);
+    }
+
+    private static Vector randomVectorWithinImageArea(int width, int height, Random random) {
         int i = (width/2) - random.nextInt(width);
         int j = (height/2) - random.nextInt(height);
         int k = -(ColoredImageRenderer.DISTANCE +random.nextInt(10));
-        Vector position = new Vector(i, j, k);
-        return getCube(position, random.nextInt(50), random.nextInt(50), -random.nextInt(20));
+        return new Vector(i, j, k);
     }
 
     static List<Triangle> getCube(Vector vertex, int i, int j, int k) {

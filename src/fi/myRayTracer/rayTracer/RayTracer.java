@@ -26,11 +26,15 @@ public class RayTracer {
     Pixel traceRay(Ray ray) {
         Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
         if (hit.isPresent()) {
-            double light = getLighting(hit.get().getValue().pointOnThePlane);
-            return hit.get().getKey().color;
+            double intensity = getLighting(hit.get().getValue().pointOnThePlane);
+            return getColor(hit.get().getKey().color, intensity/1000);
         } else {
             return WHITE;
         }
+    }
+
+    private Pixel getColor(Pixel color, double v) {
+        return new Pixel((int)Math.ceil(color.r*v), (int)Math.ceil(color.g*v), (int)Math.ceil(color.b*v));
     }
 
     private Optional<Map.Entry<Triangle, Hit>> getHit(Ray ray) {
@@ -51,12 +55,17 @@ public class RayTracer {
     }
 
     private double intensityFromLight(Vector pointOnThePlane, PointLight light) {
-        Ray ray = new Ray(pointOnThePlane, light.position.minus(pointOnThePlane).unitVector());
+        Vector r = light.position.minus(pointOnThePlane).unitVector();
+        Ray ray = new Ray(pointOnThePlane.plus(r.multiply(0.0001)), r);
         Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
         if (hit.isPresent()) {
             return 0;
         } else {
-            return light.getIntensity(Vector.distance(pointOnThePlane, light.position));
+            double distance = Vector.distance(pointOnThePlane, light.position);
+            double intensity = light.getIntensity(distance);
+            System.out.println(intensity);
+//            System.out.println(distance);
+            return 1000; //just for testing;
         }
     }
 }

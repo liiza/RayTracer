@@ -26,6 +26,7 @@ public class ColoredImageRenderer {
 
     public static void main(String[] args) {
         ArrayList<PointLight> lights = new ArrayList<>();
+        lights.add(TestDataGenerator.getRandomPointLight());
         RayTracer tracer = new RayTracer(TestDataGenerator.getTriangles(), lights);
         Vector position = new Vector(0, 0, 0);
         Vector up = new Vector(0, 1, 0);
