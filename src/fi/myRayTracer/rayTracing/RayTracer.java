@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public class RayTracer {
 
@@ -20,7 +21,7 @@ public class RayTracer {
 
     public Pixel traceRay(Ray ray) {
         Optional<Map.Entry<Triangle, Hit>> min = triangles.stream()
-                                                          .collect(Collectors.toMap(t -> t, t -> t.intersects(ray)))
+                                                          .collect(toMap(t -> t, t -> t.intersects(ray)))
                                                           .entrySet().stream()
                                                           .filter(entry -> entry.getValue().hit)
                                                           .min((entry, entry2) -> Double.compare(entry.getValue().distance, entry2.getValue().distance));

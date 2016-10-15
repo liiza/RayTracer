@@ -17,26 +17,83 @@ public class TriangleTest {
 
     public static void main(String[] args) {
         System.out.println("Triangle tests");
-        should_return_correct_normal_vector();
-        should_return_correct_distance_to_plane();
-        should_return_correct_point_on_the_plane();
-        should_return_true_if_point_inside_triangle();
-        should_return_false_if_point_is_not_inside_triangle();
-        should_return_true_if_above_the_surface();
-        should_return_false_if_not_above_the_surface();
         should_return_true_for_ray_that_intersects_triangle();
         should_return_false_for_ray_that_does_not_intersect_triangle();
+        should_return_false_for_ray_that_doesnt_point_to_triangle();
+        should_return_false_for_ray_that_is_paraller_to_triangle();
+        should_return_true_if_point_inside_triangle();
+        should_return_false_if_point_is_not_inside_triangle();
+        should_return_correct_point_on_the_plane();
+        should_return_correct_distance_to_plane();
+        should_return_true_if_above_the_surface();
+        should_return_false_if_not_above_the_surface();
+        should_return_correct_normal_vector();
     }
 
-    private static void should_return_correct_normal_vector() {
-        System.out.println("Should return correct normal vector");
-        Triangle t = new Triangle(vertex(1, -2, 0), vertex(3, 1, 4), vertex(0, -1, 2), COLOR);
+    private static void should_return_true_for_ray_that_intersects_triangle() {
+        System.out.println("Should return true for ray that intersects triangle");
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector r =  new Vector(0, 0, 1);
+        Vector P0 = new Vector(0, 1, 0);
+        Ray ray = new Ray(P0, r);
 
-        Vector planeNormal = t.getPlaneNormal();
+        Hit hit = triangle.intersects(ray);
 
-        assertDouble(2/Math.sqrt(93), planeNormal.i);
-        assertDouble(-8/Math.sqrt(93), planeNormal.j);
-        assertDouble(5/Math.sqrt(93), planeNormal.k);
+        assertTrue(hit.hit);
+    }
+
+    private static void should_return_false_for_ray_that_does_not_intersect_triangle() {
+        System.out.println("Should return false for ray that does not intersect triangle");
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector r =  new Vector(0, 0, 1);
+        Vector P0 = new Vector(0, -1, 100);
+        Ray ray = new Ray(P0, r);
+
+        Hit hit = t.intersects(ray);
+
+        assertFalse(hit.hit);
+    }
+
+    private static void should_return_false_for_ray_that_doesnt_point_to_triangle() {
+        System.out.println("Should return false for ray that doesnt point to triangle");
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector r =  new Vector(0, 0, -1);
+        Vector P0 = new Vector(0, 0, 0);
+        Ray ray = new Ray(P0, r);
+
+        Hit hit = t.intersects(ray);
+
+        assertFalse(hit.hit);
+    }
+
+    private static void should_return_false_for_ray_that_is_paraller_to_triangle() {
+        System.out.println("Should return false for ray that is paraller to triangle");
+        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector r =  new Vector(1, 0, 0);
+        Vector P0 = new Vector(0, 0, 0);
+        Ray ray = new Ray(P0, r);
+
+        Hit hit = t.intersects(ray);
+
+        assertFalse(hit.hit);
+    }
+
+    private static void should_return_true_if_point_inside_triangle() {
+        System.out.println("Should return true if point inside triangle");
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector P = new Vector(0, 1, 1);
+        Vector P0 = new Vector(0, 1, -1);
+
+        assertTrue(triangle.isInsideTriangle(P, P0));
+    }
+
+    private static void should_return_false_if_point_is_not_inside_triangle() {
+        System.out.println("Should return false if point is not inside triangle");
+        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
+        Vector P = new Vector(0, 10, 1);
+        Vector P0 = new Vector(0, 1, -1);
+
+        assertFalse(triangle.isInsideTriangle(P, P0));
     }
 
     private static void should_return_correct_distance_to_plane() {
@@ -63,24 +120,6 @@ public class TriangleTest {
         assertDouble(1.0, point.k);
     }
 
-    private static void should_return_true_if_point_inside_triangle() {
-        System.out.println("Should return true if point inside triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
-        Vector P = new Vector(0, 1, 1);
-        Vector P0 = new Vector(0, 1, -1);
-
-        assertTrue(triangle.isInsideTriangle(P, P0));
-    }
-
-    private static void should_return_false_if_point_is_not_inside_triangle() {
-        System.out.println("Should return false if point is not inside triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
-        Vector P = new Vector(0, 10, 1);
-        Vector P0 = new Vector(0, 1, -1);
-
-        assertFalse(triangle.isInsideTriangle(P, P0));
-    }
-
     private static void should_return_true_if_above_the_surface(){
         System.out.println("Should return true if above the surface");
         Vector v1 = vertex(-5, 0, 1);
@@ -101,28 +140,15 @@ public class TriangleTest {
         assertTrue(Triangle.isAboveSurface(v1, v2, P, P0));
     }
 
-    private static void should_return_true_for_ray_that_intersects_triangle() {
-        System.out.println("Should return true for ray that intersects triangle");
-        Triangle triangle = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
-        Vector r =  new Vector(0, 0, 1);
-        Vector P0 = new Vector(0, 1, 0);
-        Ray ray = new Ray(P0, r);
+    private static void should_return_correct_normal_vector() {
+        System.out.println("Should return correct normal vector");
+        Triangle t = new Triangle(vertex(1, -2, 0), vertex(3, 1, 4), vertex(0, -1, 2), COLOR);
 
-        Hit hit = triangle.intersects(ray);
+        Vector planeNormal = t.getPlaneNormal();
 
-        assertTrue(hit.hit);
-    }
-
-    private static void should_return_false_for_ray_that_does_not_intersect_triangle() {
-        System.out.println("Should return false for ray that does not intersect triangle");
-        Triangle t = new Triangle(vertex(-5, 0, 1), vertex(0, 5, 1), vertex(5, 0, 1), COLOR);
-        Vector r =  new Vector(0, 0, 1);
-        Vector P0 = new Vector(0, -1, 100);
-        Ray ray = new Ray(P0, r);
-
-        Hit hit = t.intersects(ray);
-
-        assertFalse(hit.hit);
+        assertDouble(2/Math.sqrt(93), planeNormal.i);
+        assertDouble(-8/Math.sqrt(93), planeNormal.j);
+        assertDouble(5/Math.sqrt(93), planeNormal.k);
     }
 
 }
