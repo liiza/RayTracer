@@ -11,6 +11,7 @@ import java.util.Random;
 
 import static fi.myRayTracer.geometry.Vector.vertex;
 import static fi.myRayTracer.rendering.ColoredImageRenderer.HEIGHT;
+import static fi.myRayTracer.rendering.ColoredImageRenderer.RED;
 import static fi.myRayTracer.rendering.ColoredImageRenderer.WIDTH;
 
 public class TestDataGenerator {
@@ -25,11 +26,11 @@ public class TestDataGenerator {
     static Collection<? extends Triangle> randomCube(int width, int height) {
         Random random = new Random();
         Vector position = randomVectorWithinImageArea(width, height, random);
-        return getCube(position, random.nextInt(50), random.nextInt(50), -random.nextInt(20));
+        return getCube(position, random.nextInt(100), random.nextInt(100), -random.nextInt(20));
     }
 
     static PointLight getRandomPointLight() {
-        return new PointLight(randomVectorWithinImageArea(WIDTH, HEIGHT, new Random()), 1000);
+        return new PointLight(randomVectorWithinImageArea(WIDTH, HEIGHT, new Random()), 1);
     }
 
     private static Vector randomVectorWithinImageArea(int width, int height, Random random) {
@@ -59,8 +60,8 @@ public class TestDataGenerator {
 
     static List<Triangle> getRectangle(Vector v0, Vector y, Vector x) {
         List<Triangle> triangles = new ArrayList<>();
-        triangles.add(new Triangle(v0, v0.plus(x).plus(y), v0.plus(y), ColoredImageRenderer.RED));
-        triangles.add(new Triangle(v0, v0.plus(x), v0.plus(x).plus(y), ColoredImageRenderer.BLUE));
+        triangles.add(new Triangle(v0, v0.plus(x).plus(y), v0.plus(y), RED));
+        triangles.add(new Triangle(v0, v0.plus(x), v0.plus(x).plus(y), RED));
         return triangles;
     }
 }

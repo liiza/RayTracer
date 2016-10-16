@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.sun.javafx.util.Utils.clamp;
 import static java.util.stream.Collectors.toMap;
 
 public class RayTracer {
-
-    private static final Pixel WHITE = new Pixel(255, 255, 255);
 
     private final List<Triangle> triangles;
 
@@ -23,18 +22,18 @@ public class RayTracer {
         this.lights = lights;
     }
 
-    Pixel traceRay(Ray ray) {
+    Color traceRay(Ray ray) {
         Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
         if (hit.isPresent()) {
-            double intensity = getLighting(hit.get().getValue().pointOnThePlane);
-            return getColor(hit.get().getKey().color, intensity/1000);
+            double lighting = getLighting(hit.get().getKey(), hit.get().getValue().pointOnThePlane);
+            return hit.get().getKey().color.multiple(lighting);
         } else {
-            return WHITE;
+            return Color.WHITE;
         }
     }
 
-    private Pixel getColor(Pixel color, double v) {
-        return new Pixel((int)Math.ceil(color.r*v), (int)Math.ceil(color.g*v), (int)Math.ceil(color.b*v));
+    private Color getColor(Color color, double v) {
+        return new Color((int)Math.ceil(color.r*v), (int)Math.ceil(color.g*v), (int)Math.ceil(color.b*v));
     }
 
     private Optional<Map.Entry<Triangle, Hit>> getHit(Ray ray) {
@@ -46,26 +45,27 @@ public class RayTracer {
                         .min((entry, entry2) -> Double.compare(entry.getValue().distance, entry2.getValue().distance));
     }
 
-    double getLighting(Vector pointOnThePlane) {
-        double intensity = 0;
-        for (PointLight light : lights) {
-            intensity += intensityFromLight(pointOnThePlane, light);
+    double getLighting(Triangle triangle, Vector pointOnThePlane) {
+//        Color intensity = new Color(0, 0, 0);
+        //        for (PointLight light : lights) {
+        //            intensity.plus(intensityFromLight(triangle.getNormal(), pointOnThePlane, light));
+        if (lights.size() > 0) {
+            return intensityFromLight(triangle.getNormal(), pointOnThePlane, lights.get(0));
         }
-        return intensity;
+        //        }
+        return 0.0;
     }
 
-    private double intensityFromLight(Vector pointOnThePlane, PointLight light) {
-        Vector r = light.position.minus(pointOnThePlane).unitVector();
-        Ray ray = new Ray(pointOnThePlane.plus(r.multiply(0.0001)), r);
+    private double intensityFromLight(Vector surfaceNormal, Vector pointOnThePlane, PointLight light) {
+        Vector L = light.position.minus(pointOnThePlane).unitVector();
+        // Lift point slightly from the surface
+        Vector P = pointOnThePlane.plus(L.multiply(0.0001));
+        Ray ray = new Ray(P, L);
         Optional<Map.Entry<Triangle, Hit>> hit = getHit(ray);
         if (hit.isPresent()) {
             return 0;
         } else {
-            double distance = Vector.distance(pointOnThePlane, light.position);
-            double intensity = light.getIntensity(distance);
-            System.out.println(intensity);
-//            System.out.println(distance);
-            return 1000; //just for testing;
+            return clamp(light.intensity * (Math.max(Vector.dotProduct(L, surfaceNormal), 0)), 0, 1);
         }
     }
 }

@@ -1,6 +1,6 @@
 package fi.myRayTracer.rendering;
 
-import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.Color;
 import fi.myRayTracer.TestUtils;
 
 public class ColoredImageRendererTest {
@@ -10,7 +10,7 @@ public class ColoredImageRendererTest {
     }
 
     private static void should_return_int_value_for_rgb() {
-        int rgbInt = Pixel.toRGBInt(255, 255, 255);
+        int rgbInt = Color.toRGBInt(255, 255, 255);
 
         TestUtils.assertInt(16777215, rgbInt);
     }

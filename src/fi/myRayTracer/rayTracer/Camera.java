@@ -23,8 +23,8 @@ public class Camera {
         this(rayTracer, new Vector(0, 0, 0), new Vector(0, 1, 0), new Vector(0, 0, -1));
     }
 
-    public Pixel[][] takePicture(double distance, int height, int width) {
-        Pixel[][] pixels = new Pixel[height][width];
+    public Color[][] takePicture(double distance, int height, int width) {
+        Color[][] pixels = new Color[height][width];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Ray ray = new Ray(position, getRayVector(distance, toSurfaceCoordinate(x, width), toSurfaceCoordinate(y, height)));

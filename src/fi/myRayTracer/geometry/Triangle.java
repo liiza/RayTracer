@@ -1,7 +1,7 @@
 package fi.myRayTracer.geometry;
 
 import fi.myRayTracer.rayTracer.Hit;
-import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.Color;
 import fi.myRayTracer.rayTracer.Ray;
 
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ public class Triangle {
     public final Vector v1;
     public final Vector v2;
     public final Vector v3;
-    public final Pixel color;
+    public final Color color;
 
-    public Triangle(Vector v1, Vector e2, Vector e3, Pixel color) {
+    public Triangle(Vector v1, Vector e2, Vector e3, Color color) {
         this.v1 = v1;
         this.v2 = e2;
         this.v3 = e3;
@@ -65,5 +65,9 @@ public class Triangle {
         vertices.add(v2);
         vertices.add(v3);
         return vertices;
+    }
+
+    public Vector getNormal() {
+        return Vector.crossProduct(v1.minus(v2), v2.minus(v3)).unitVector();
     }
 }

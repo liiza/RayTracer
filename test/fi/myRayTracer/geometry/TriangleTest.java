@@ -1,7 +1,7 @@
 package fi.myRayTracer.geometry;
 
 import fi.myRayTracer.rayTracer.Hit;
-import fi.myRayTracer.rayTracer.Pixel;
+import fi.myRayTracer.rayTracer.Color;
 import fi.myRayTracer.rayTracer.Ray;
 
 import static fi.myRayTracer.TestUtils.assertDouble;
@@ -11,7 +11,7 @@ import static fi.myRayTracer.geometry.Vector.vertex;
 
 public class TriangleTest {
 
-    public static final Pixel COLOR = new Pixel(0, 0, 0);
+    public static final Color COLOR = new Color(0, 0, 0);
 
     public static void main(String[] args) {
         System.out.println("Triangle tests");
