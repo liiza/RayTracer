@@ -13,6 +13,7 @@ import static java.util.stream.Collectors.toMap;
 
 public class RayTracer {
 
+    public static final double AMBIENT_LIGHT = 0.25;
     private final List<Triangle> triangles;
 
     private final List<PointLight> lights;
@@ -32,10 +33,6 @@ public class RayTracer {
         }
     }
 
-    private Color getColor(Color color, double v) {
-        return new Color((int)Math.ceil(color.r*v), (int)Math.ceil(color.g*v), (int)Math.ceil(color.b*v));
-    }
-
     private Optional<Map.Entry<Triangle, Hit>> getHit(Ray ray) {
         return triangles.stream()
                         .collect(toMap(t -> t, t -> t.intersects(ray)))
@@ -46,17 +43,14 @@ public class RayTracer {
     }
 
     double getLighting(Triangle triangle, Vector pointOnThePlane) {
-//        Color intensity = new Color(0, 0, 0);
-        //        for (PointLight light : lights) {
-        //            intensity.plus(intensityFromLight(triangle.getNormal(), pointOnThePlane, light));
-        if (lights.size() > 0) {
-            return intensityFromLight(triangle.getNormal(), pointOnThePlane, lights.get(0));
+        double diffusion = 0;
+        for (PointLight light : lights) {
+            diffusion += diffusion(triangle.getNormal(), pointOnThePlane, light);
         }
-        //        }
-        return 0.0;
+        return clamp(0, diffusion + AMBIENT_LIGHT, 1);
     }
 
-    private double intensityFromLight(Vector surfaceNormal, Vector pointOnThePlane, PointLight light) {
+    private double diffusion(Vector surfaceNormal, Vector pointOnThePlane, PointLight light) {
         Vector L = light.position.minus(pointOnThePlane).unitVector();
         // Lift point slightly from the surface
         Vector P = pointOnThePlane.plus(L.multiply(0.0001));
@@ -65,7 +59,7 @@ public class RayTracer {
         if (hit.isPresent()) {
             return 0;
         } else {
-            return clamp(light.intensity * (Math.max(Vector.dotProduct(L, surfaceNormal), 0)), 0, 1);
+            return light.intensity * (Math.max(Vector.dotProduct(L, surfaceNormal), 0));
         }
     }
 }

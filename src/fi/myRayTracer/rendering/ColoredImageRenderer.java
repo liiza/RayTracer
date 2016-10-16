@@ -39,9 +39,6 @@ public class ColoredImageRenderer {
         for (int j = 0; j < HEIGHT; j++) {
             for (int i = 0; i < WIDTH; i++) {
                 image.setRGB(i, j, toRGBInt(pixels[j][i].r, pixels[j][i].g, pixels[j][i].b));
-                if (pointLight.position.i == i && pointLight.position.j == j){
-                    image.setRGB(i, j, BLACK.toRGBInt());
-                }
             }
         }
         try {
