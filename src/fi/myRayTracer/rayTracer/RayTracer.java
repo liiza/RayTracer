@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toMap;
 
 public class RayTracer {
 
-    public static final double AMBIENT_LIGHT = 0.25;
+    private static final double AMBIENT_LIGHT = 0.25;
     private final List<Triangle> triangles;
 
     private final List<PointLight> lights;

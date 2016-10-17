@@ -27,15 +27,19 @@ public class Camera {
         Color[][] pixels = new Color[height][width];
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                Ray ray = new Ray(position, getRayVector(distance, toSurfaceCoordinate(x, width), toSurfaceCoordinate(y, height)));
+                Ray ray = new Ray(position, getRayVector(distance, to3DCoordinate(x, width), to3DCoordinate(y, height)));
                 pixels[y][x] = rayTracer.traceRay(ray);
             }
         }
         return pixels;
     }
 
-    private int toSurfaceCoordinate(int i, int surface) {
+    public static int to3DCoordinate(int i, int surface) {
         return i - surface/2;
+    }
+
+    public static Vector toSurfaceCoordinates(Vector point, int width, int height) {
+        return new Vector(point.i + width/2, point.j + height/2, 0);
     }
 
     private Vector getRayVector(double distance, int x, int y) {

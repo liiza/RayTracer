@@ -5,8 +5,8 @@ import fi.myRayTracer.geometry.Vector;
 
 import java.util.List;
 
-import static fi.myRayTracer.rendering.ColoredImageRenderer.BLUE;
-import static fi.myRayTracer.rendering.ColoredImageRenderer.RED;
+import static fi.myRayTracer.rayTracer.Color.BLUE;
+import static fi.myRayTracer.rayTracer.Color.RED;
 import static fi.myRayTracer.TestUtils.assertInt;
 import static fi.myRayTracer.TestUtils.assertTriangle;
 import static fi.myRayTracer.geometry.Vector.vertex;

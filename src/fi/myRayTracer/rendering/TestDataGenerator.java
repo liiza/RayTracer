@@ -9,9 +9,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import static fi.myRayTracer.geometry.Vector.vertex;
 import static fi.myRayTracer.rendering.ColoredImageRenderer.HEIGHT;
-import static fi.myRayTracer.rendering.ColoredImageRenderer.RED;
+import static fi.myRayTracer.rayTracer.Color.RED;
 import static fi.myRayTracer.rendering.ColoredImageRenderer.WIDTH;
 
 public class TestDataGenerator {
@@ -27,6 +26,14 @@ public class TestDataGenerator {
         Random random = new Random();
         Vector position = randomVectorWithinImageArea(width, height, random);
         return getCube(position, random.nextInt(100), random.nextInt(100), -random.nextInt(20));
+    }
+
+    static List<PointLight> getRandomPointLights(int amount) {
+        List<PointLight> lights = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            lights.add(getRandomPointLight());
+        }
+        return lights;
     }
 
     static PointLight getRandomPointLight() {

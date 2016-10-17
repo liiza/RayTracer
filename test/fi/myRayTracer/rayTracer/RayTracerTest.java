@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static fi.myRayTracer.geometry.Vector.vertex;
-import static fi.myRayTracer.rendering.ColoredImageRenderer.RED;
+import static fi.myRayTracer.rayTracer.Color.RED;
 
 public class RayTracerTest {
 
